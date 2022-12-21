@@ -16,7 +16,7 @@ function App() {
           navigator.userAgent.indexOf('iPad') != -1 || 
           navigator.userAgent.indexOf('Android') != -1 || 
           navigator.userAgent.indexOf('Windows Phone') != -1
-        ) && window.DeviceOrientationEvent
+        )
     ) {
       window.screen.orientation.lock('landscape')
       .then(()=>{
