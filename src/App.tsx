@@ -6,6 +6,8 @@ function App() {
 
   const [test, setTest] = useState<string>('Test')  
 
+
+
   useEffect(()=>{
     if (
         (
@@ -16,6 +18,9 @@ function App() {
         ) && window.DeviceOrientationEvent
     ) {
       setTest('Mobile')
+      if(screen.orientation){
+        screen.orientation.lock('landscape')
+      }
     } else {
       setTest('Ordi')
     }
