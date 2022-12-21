@@ -18,6 +18,7 @@ function App() {
           navigator.userAgent.indexOf('Windows Phone') != -1
         )
     ) {
+      setTest('CFAIS')
       window.screen.orientation.lock('landscape')
       .then(()=>{
         setTest('CFAIS')
