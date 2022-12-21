@@ -17,9 +17,10 @@ function App() {
           navigator.userAgent.indexOf('Windows Phone') != -1
         ) && window.DeviceOrientationEvent
     ) {
-      setTest('Mobile')
+      
       if(window.screen.orientation){
         window.screen.orientation.lock('landscape')
+        setTest('Mobile')
       }
     } else {
       setTest('Ordi')
