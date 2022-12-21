@@ -18,8 +18,8 @@ function App() {
         ) && window.DeviceOrientationEvent
     ) {
       setTest('Mobile')
-      if(screen.orientation){
-        screen.orientation.lock('landscape')
+      if(window.screen.orientation){
+        window.screen.orientation.lock('landscape')
       }
     } else {
       setTest('Ordi')
