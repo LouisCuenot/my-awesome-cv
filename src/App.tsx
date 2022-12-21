@@ -25,6 +25,7 @@ function App() {
       })
       .catch(()=>{
         setTest('CPASFAIS')
+        setSossur(true)
       })
       
     } else {
