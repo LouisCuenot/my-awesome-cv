@@ -18,12 +18,13 @@ function App() {
         ) && window.DeviceOrientationEvent
     ) {
       window.screen.orientation.lock('landscape')
-      if(window.screen.orientation){
-       
-        
-      }else{
-        setTest('Mobile')
-      }
+      .then(()=>{
+        setTest('CFAIS')
+      })
+      .catch(()=>{
+        setTest('CPASFAIS')
+      })
+      
     } else {
       setTest('Ordi')
     }
