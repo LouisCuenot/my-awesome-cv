@@ -20,6 +20,8 @@ function App() {
       
       if(window.screen.orientation){
         window.screen.orientation.lock('landscape')
+        
+      }else{
         setTest('Mobile')
       }
     } else {
