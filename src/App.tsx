@@ -5,6 +5,7 @@ import './App.css';
 function App() {
 
   const [test, setTest] = useState<string>('Test')  
+  const [sossur,setSossur] = useState<boolean>(false)
 
 
 
@@ -20,6 +21,7 @@ function App() {
       window.screen.orientation.lock('landscape')
       .then(()=>{
         setTest('CFAIS')
+        setSossur(true)
       })
       .catch(()=>{
         setTest('CPASFAIS')
@@ -31,8 +33,9 @@ function App() {
   },[])
 
   return (
-    <div className="App" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+    <div className={("App") + (sossur === true ? ' yeslife' : '')} style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
       <span>{test}</span>
+      
     </div>
   );
 }
