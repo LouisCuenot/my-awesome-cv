@@ -1,9 +1,13 @@
-import { Vector3, useFrame } from '@react-three/fiber'
-import { Image } from '@react-three/drei'
+import { Vector3, useFrame, extend } from '@react-three/fiber'
+import { Image,Plane,RoundedBox } from '@react-three/drei'
 import React, { useEffect, useState, useRef } from 'react'
 import { CuboidCollider, RigidBody } from '@react-three/rapier'
 import * as THREE from 'three'
 import { useSpring, animated } from '@react-spring/three'
+import CappingShaderMaterial from './CappingShaderMaterial/CappingShaderMaterial'
+
+
+
 
 const CVZone = (props:{
     position:Vector3,
@@ -28,12 +32,12 @@ const CVZone = (props:{
 
 
     useFrame(()=>{
-        if(id === currentCappingZoneID){
-            console.log(percentageCapped)  
-        }
+        
         if(isCapping){
             setPercentageCapped(percentageCapped+0.5)
         }
+
+        
 
         if(percentageCapped >=100 && isActive === false){
             setIsActive(true)
@@ -45,12 +49,15 @@ const CVZone = (props:{
         scale: isActive ? 1 : 0
     })
 
+    useEffect(()=>{
+        console.log(percentageCapped)
+    },[percentageCapped])
+
   return (
     <group
         position={position}
         rotation={[-Math.PI*0.5,0,0]}
     >
-        
             <animated.group
                 scale={scale}
             >
@@ -60,8 +67,6 @@ const CVZone = (props:{
                     transparent
                 />
             </animated.group>
-            
-        
         {
             id === currentCappingZoneID ?
             <CuboidCollider
@@ -71,6 +76,41 @@ const CVZone = (props:{
                 onIntersectionEnter={()=>setIsCapping(true)}
                 onIntersectionExit={()=>setIsCapping(false)}
             />
+            :
+            null
+        }
+
+        {
+            id === currentCappingZoneID ?
+            <>
+                <Plane
+                    args={[size.width-0.1,0.1,32,2]}
+                    position-y={-size.height*0.5}
+                >
+                    <CappingShaderMaterial percentageCapped={(percentageCapped-0)/25} lineWidth={size.width-0.1} />
+                </Plane>
+                <Plane
+                    args={[size.height+0.1,0.1,32,2]}
+                    position-x={size.width*0.5}
+                    rotation-z={Math.PI*0.5}
+                >
+                    <CappingShaderMaterial percentageCapped={(percentageCapped-25)/25} lineWidth={size.height+0.1} />
+                </Plane>
+                <Plane
+                    args={[size.width-0.1,0.1,32,2]}
+                    position-y={size.height*0.5}
+                    rotation-z={Math.PI}
+                >
+                    <CappingShaderMaterial percentageCapped={(percentageCapped-50)/25} lineWidth={size.width-0.1} />
+                </Plane>
+                <Plane
+                    args={[size.height+0.1,0.1,32,2]}
+                    position-x={-size.width*0.5}
+                    rotation-z={-Math.PI*0.5}
+                >
+                    <CappingShaderMaterial percentageCapped={(percentageCapped-75)/25} lineWidth={size.height+0.1} />
+                </Plane>
+            </>
             :
             null
         }

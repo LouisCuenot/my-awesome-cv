@@ -202,7 +202,8 @@ function App() {
         <Directionnal/>
         <ambientLight args={[0xffffff,0.2]}/>
         <Physics>
-         <Debug/>
+         
+         
           <PlateformGroup 
             currentInputs={currentInputs} 
             difficulty={difficulty}
