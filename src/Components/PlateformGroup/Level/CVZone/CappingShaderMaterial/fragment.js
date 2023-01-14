@@ -3,8 +3,7 @@ export default /* glsl */ `
 precision mediump float;
 
 
-varying float vLineDashes;
-varying float vIsPointCapped;
+varying vec3 vPosition;
 
 
 uniform float uTime;
@@ -14,15 +13,19 @@ uniform float uPercentageCapped;
 
 void main()
 {
-    vec4 pointColor;
-    if(vIsPointCapped == 1.0){
-        pointColor = vec4(0.35,0.77,0.63,1.0);
-    }else if(vLineDashes == 1.0){
-        pointColor = vec4(1.0,0.83,0.6,1.0);
-    }else{
-        pointColor = vec4(0.29,0.2,0.14,1.0);
+    vec3 pointColor = vec3(0.29,0.2,0.14);
+    
+    float vIsPointCapped = 0.0;
+    if((vPosition.x+1.0)*0.5 < uPercentageCapped){
+        vIsPointCapped = 1.0;
     }
+    float vLineDashes = step(0.5,mod(((vPosition.x+1.0)*2.5)+uTime,1.0));
 
+    vec3 dashColor = vec3(1.0,0.83,0.6);
+    pointColor = mix(pointColor, dashColor, vLineDashes);
+    
+    vec3 capColor = vec3(0.35,0.77,0.63);
+    pointColor = mix(pointColor, capColor, vIsPointCapped);
 
-    gl_FragColor = vec4(pointColor);
-}`
+    gl_FragColor = vec4(pointColor, 1.0);
+}`;
