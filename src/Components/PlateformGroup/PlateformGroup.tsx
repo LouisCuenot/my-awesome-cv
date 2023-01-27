@@ -9,8 +9,6 @@ import ChooseDifficulty from './ChooseDifficulty/ChooseDifficulty'
 import Level from './Level/Level'
 
 
-
-
 const PlateformGroup = (props:{
     currentInputs:{
         top:boolean,
@@ -27,9 +25,10 @@ const PlateformGroup = (props:{
     setSavedDiff:(diff:string)=>void
     ballList:number[]
     setWind:(value:number)=>void
+    setMainZRotation:(value:number)=>void
 }) => {
 
-    const {currentInputs, difficulty, isTouchScreen, setDifficulty, setBallList,ballList, isJumpPossible, setIsJumpPossible, setSavedDiff, setWind} = props
+    const {currentInputs, difficulty, isTouchScreen, setDifficulty, setBallList,ballList, isJumpPossible, setIsJumpPossible, setSavedDiff, setWind, setMainZRotation} = props
 
 
 
@@ -41,7 +40,6 @@ const PlateformGroup = (props:{
 
     useFrame((state)=>{
        
-        //console.log(state);
         
         if(currentInputs.left && zRotation<Math.PI*0.05){
             setZRotation(zRotation+0.01)
@@ -68,6 +66,10 @@ const PlateformGroup = (props:{
     
       
     }, [ballList])
+
+    useEffect(()=>{
+        setMainZRotation(xRotation)
+    },[xRotation])
     
 
   return (

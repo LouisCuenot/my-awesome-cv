@@ -14,6 +14,7 @@ import VoidArea from './Components/VoidArea/VoidArea';
 import BallMapping from './Components/BallMapping/BallMapping';
 import WinLoseScreen from './Components/WinLoseScreen/WinLoseScreen';
 import LivesUI from './Components/LivesUI/LivesUI';
+import HorizontalView from './Components/HorizontalView/HorizontalView';
 
 
 
@@ -36,6 +37,8 @@ function App() {
   const [jumpValue, setJumpValue] = useState<number>(0)
 
   const [windValue, setWindValue] = useState<number>(0)
+
+  const [zRotation, setZRotation] = useState<number>(0)
 
   const [pressedKeys, setPressedKeys] = useState<{
     top:boolean,
@@ -233,6 +236,7 @@ function App() {
           ballMapping={ballsList}
           difficulty={difficulty}
         />
+        <HorizontalView zRotation={zRotation}/>
         <Physics>
           
           <PlateformGroup 
@@ -246,6 +250,7 @@ function App() {
             setIsJumpPossible={(jump:boolean)=>setIsJumpPossible(jump)}
             setSavedDiff={(diff:string)=>setSavedDiff(diff)}
             setWind={(value:number)=>setWindValue(value)}
+            setMainZRotation={(value)=>setZRotation(value)}
           />
           <VoidArea
             onBallFall={()=>setBallsList(ballsList.concat(ballsList.length))}
