@@ -8,17 +8,17 @@ const HorizontalView = (props:{
 
     const {zRotation} = props
 
-    const divRef = useRef<HTMLDivElement>(null!)
 
-    useEffect(()=>{
-      divRef.current.style.transform = `rotate(${-zRotation*180/Math.PI}deg)`
-    },[zRotation])
+
 
   return (
     <Html fullscreen>
         <div id="horizontalViewContainer">
             <div
-              ref={divRef}
+            style={{
+              transform:`rotate(${-zRotation*180/Math.PI}deg)`
+            }}
+
             >
               <div/>
             </div>
