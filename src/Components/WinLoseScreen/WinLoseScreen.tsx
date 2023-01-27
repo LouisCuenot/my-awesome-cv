@@ -89,9 +89,9 @@ const WinLoseScreen = (props:{
                     <h2>You won !</h2>
                     
                     <img src={cv} alt='A CV' className='cv' onPointerEnter={()=>setIsHovered(true)} onPointerLeave={()=>setIsHovered(false)} onClick={()=>{
-                      if(savedDiff === 'Easy'){
+                      if(savedDiff === 'Easy'){                        
                           downloadURI('./pdf/CV_Louis_Cuenot_Easy.pdf')
-                      }else if(savedDiff === 'Medium'){
+                      }else if(savedDiff === 'Medium'){                        
                           downloadURI('./pdf/CV_Louis_Cuenot_Medium.pdf')
                       }else if(savedDiff === 'Hard'){
                         downloadURI('./pdf/CV_Louis_Cuenot_Hard.pdf')
