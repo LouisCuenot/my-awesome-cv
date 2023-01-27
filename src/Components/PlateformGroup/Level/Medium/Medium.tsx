@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useRef, Ref, useEffect } from 'react'
 import { Image } from '@react-three/drei'
+import MovingBar from '../Obstacles/MovingBar/MovingBar'
+
 
 const Medium = () => {
+
+
+
+
   return (
     <>
         <Image
@@ -11,6 +17,8 @@ const Medium = () => {
             transparent
             scale={[15.25,8.25]}
         />
+        <MovingBar/>
+        
     </>
   )
 }

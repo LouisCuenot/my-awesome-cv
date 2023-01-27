@@ -1,0 +1,171 @@
+.winLoseScreen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    .container{
+        background-color: #ffe4bb;
+        width: 50vw;
+        height: 35vw;
+        max-height: 95vh;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 4vw;
+        h2{
+            color: #493423;
+            font-family: Durer;
+            font-size: 48px;
+        }
+        @media screen and (max-width:1200px){
+            h2{
+                font-size: 30px;
+            }
+        }
+    .mainDiv{
+        width: 80%;
+        height: fit-content;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .loseButtons{
+            width: 60%;
+            height: 100%;
+            display: flex;
+            .button{
+                width: 45%;
+                height: 60px;
+                padding: 7px 15px;
+                border: #493423 solid 2px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: .2s ease-in-out;
+                &:hover{
+                    transform: translateY(-10px);
+                }
+                span{
+                    font-family: Durer;
+                    font-size: 19px;
+                    text-align: center;
+                    width: fit-content;
+                }
+    
+            }
+            @media screen and (max-width:1200px) {
+                .button{
+                    height: 35px;
+                    span{
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+            img{
+                height: 25px;
+                transition: .2s ease-in-out;
+                &:not(:first-of-type){
+                    margin-left: 15px;
+                }
+                &:hover{
+                    transform: translateY(-10px);
+                }
+            }
+            @media screen and (max-width:1200px){
+                img{
+                    height: 17px;
+                }
+            }
+        }
+        
+    }
+    @media screen and (max-width:900px){
+        .mainDiv{
+            flex-direction: column;
+            .loseButtons{
+                margin-bottom: 20px;
+            }
+        }
+    }
+    
+    .cantWin{
+        font-family: Montserrat;
+        opacity: 0.8;
+        font-size: 14px;
+        color:#493423;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+    @media screen and (max-width:1200px){
+        .cantWin{
+            font-size: 10px;
+        }
+    }
+
+    .cv{
+        width: 60%;
+        max-height: 60%;
+        cursor: pointer;
+        transition: 0.2s ease;
+        &:hover{
+            transform: scale(1.05);
+        }
+        div{
+            width: 100%;
+            height: 100%;
+            background-color: #232323;
+
+            
+        }
+    }
+
+    #socialswin{
+        width: fit-content;
+        height: 20px;
+        img{
+            height: 20px;
+            transition: ease-in-out .2s;
+            &:not(:last-of-type){
+                margin-right: 15px;
+            }
+            &:hover{
+                transform: translateY(-10px);
+            }
+        }
+    }
+
+    
+}
+
+
+.frame{
+    position:absolute;
+    left: 50vw;
+    top: 50vh;
+    transform: translateX(-50%) translateY(-50%);
+    width: 47vw;
+    max-height: 100%;
+    pointer-events: none;
+}
+
+.isHovered{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    transform: translateX(-50%) translateY(-50%);
+    width: fit-content;
+    height: fit-content;
+    padding: 5px 10px;
+    border-radius: 10px;
+    span{
+        color: #ffffff;
+        font-family: Montserrat;
+    }
+}

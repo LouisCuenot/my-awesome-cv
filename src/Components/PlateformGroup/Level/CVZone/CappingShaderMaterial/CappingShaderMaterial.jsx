@@ -28,9 +28,6 @@ const CappingShaderMaterial = (props) => {
     const shaderRef = useRef()
 
     useFrame((state)=>{
-        if(shaderRef.current.uniformsNeedUpdate === false){
-          shaderRef.current.uniformsNeedUpdate = true
-        }
         shaderRef.current.uTime = -state.clock.elapsedTime*0.6
     })
 

@@ -6,6 +6,7 @@ const BallMapping = (props:{
   isJumpPossible:boolean,
   jumpValue:number
   setIsJumpPossible:()=>void
+  windValue:number
 }) => {
   return (
     <>
@@ -16,6 +17,7 @@ const BallMapping = (props:{
             isJumpPossible={props.isJumpPossible}
             jumpValue={props.jumpValue}
             setIsJumpPossible={props.setIsJumpPossible}
+            windValue={props.windValue}
           />
         ))
       }

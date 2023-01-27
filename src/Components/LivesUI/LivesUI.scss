@@ -1,0 +1,13 @@
+.livesContainer{
+    width: 250px;
+    height: 60px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    img{
+        height: 60%;
+    }
+}

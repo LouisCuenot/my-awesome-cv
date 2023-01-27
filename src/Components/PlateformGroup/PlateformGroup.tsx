@@ -10,6 +10,7 @@ import Level from './Level/Level'
 
 
 
+
 const PlateformGroup = (props:{
     currentInputs:{
         top:boolean,
@@ -23,13 +24,14 @@ const PlateformGroup = (props:{
     setBallList:(numb:number[])=>void,
     isJumpPossible:boolean,
     setIsJumpPossible:(jump:boolean)=>void
+    setSavedDiff:(diff:string)=>void
+    ballList:number[]
+    setWind:(value:number)=>void
 }) => {
 
-    const {currentInputs, difficulty, isTouchScreen, setDifficulty, setBallList, isJumpPossible, setIsJumpPossible} = props
+    const {currentInputs, difficulty, isTouchScreen, setDifficulty, setBallList,ballList, isJumpPossible, setIsJumpPossible, setSavedDiff, setWind} = props
 
-    const {color } = useControls({
-        color:'#ffd69a'
-    })
+
 
     const platformHitbox = useRef<RigidBodyApi>(null!)
 
@@ -38,19 +40,18 @@ const PlateformGroup = (props:{
     
 
     useFrame((state)=>{
-
        
-       
+        //console.log(state);
         
-        if(currentInputs.left && zRotation<Math.PI*0.1){
+        if(currentInputs.left && zRotation<Math.PI*0.05){
             setZRotation(zRotation+0.01)
-        }else if (currentInputs.right && zRotation>-Math.PI*0.1){
+        }else if (currentInputs.right && zRotation>-Math.PI*0.05){
             setZRotation(zRotation-0.01)
         }
-        if(currentInputs.top && xRotation>-Math.PI*0.1){
-            setXRotation(xRotation-0.01)
-        }else if (currentInputs.bottom && xRotation < Math.PI*0.1){
-            setXRotation(xRotation+0.01)
+        if(currentInputs.top && xRotation>-Math.PI*0.05){
+            setXRotation(xRotation-0.02)
+        }else if (currentInputs.bottom && xRotation < Math.PI*0.05){
+            setXRotation(xRotation+0.02)
         }
         const eulerRotation = new THREE.Euler(xRotation, 0, zRotation)
         const quaternionRotation = new THREE.Quaternion()
@@ -62,9 +63,11 @@ const PlateformGroup = (props:{
 
     useEffect(() => {
       
+    setXRotation(0)
+    setZRotation(0)
     
       
-    }, [currentInputs.left])
+    }, [ballList])
     
 
   return (
@@ -83,7 +86,7 @@ const PlateformGroup = (props:{
                 receiveShadow
             >
                 <boxGeometry args={[16,0.2,9]}/>
-                <meshMatcapMaterial color={color}/>
+                <meshMatcapMaterial color={0xffd69a}/>
             </mesh>
             {
                 difficulty === 'commands' ?
@@ -103,6 +106,7 @@ const PlateformGroup = (props:{
                         setDifficulty={setDifficulty}
                         resetBallList={setBallList}
                         setIsJumpPossible={()=>setIsJumpPossible(false)}
+                        setSavedDiff={(diff:string)=>setSavedDiff(diff)}
                     />
                 :
                 null
@@ -112,6 +116,9 @@ const PlateformGroup = (props:{
                 ?
                     <Level
                         difficulty={difficulty}
+                        setDifficulty={setDifficulty}
+                        setBallList={setBallList}
+                        setWind={setWind}
                     />
                 :
                 null

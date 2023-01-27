@@ -3,7 +3,8 @@ import { RigidBody, BallCollider, RigidBodyApi } from '@react-three/rapier'
 import Logo from './Logo/Logo'
 import { Vector3 } from 'three'
 import { Text } from '@react-three/drei'
-import { setMaxListeners } from 'events'
+import { useFrame } from '@react-three/fiber'
+
 
 
 
@@ -11,6 +12,7 @@ const Ball = (props:{
   isJumpPossible:boolean,
   setIsJumpPossible:()=>void
   jumpValue:number
+  windValue:number
 }) => {
 
 const [ballGravity, setBallGravity] = useState<number>(0)
@@ -45,6 +47,16 @@ useEffect(()=>{
   }
 },[props.jumpValue])
 
+useEffect(()=>{
+  if(props.windValue === 1){   
+    ballRef.current.addForce(new Vector3(2*props.windValue,0,0),true) 
+  }else{
+    ballRef.current.resetForces()
+  }
+},[props.windValue])
+
+
+
 
   return (
     <>
@@ -54,9 +66,8 @@ useEffect(()=>{
           position={[0,5,0]}
           gravityScale={ballGravity}
           ref={ballRef}
-
         >
-          <BallCollider args={[0.6]}   />
+          <BallCollider args={[0.6]} mass={1.2} friction={2}  />
           <mesh castShadow>
               <sphereGeometry args={[0.6,32,16]}/>
               <meshPhysicalMaterial color={'#bff0ff'} transmission={1} thickness={0.2} roughness={0} />

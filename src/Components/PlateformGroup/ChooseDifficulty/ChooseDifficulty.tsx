@@ -6,7 +6,10 @@ const ChooseDifficulty = (props:{
     setDifficulty:(dif:string)=>void,
     resetBallList:(numb:number[])=>void
     setIsJumpPossible:()=>void
+    setSavedDiff:(diff:string)=>void
 }) => {
+
+  const {setSavedDiff} = props
   return (
     <group
         position={[0,0.11,0]}
@@ -24,6 +27,7 @@ const ChooseDifficulty = (props:{
           setDifficulty={props.setDifficulty}
           resetBallList={props.resetBallList}
           setIsJumpPossible={props.setIsJumpPossible}
+          setSavedDiff={(diff:string)=>setSavedDiff(diff)}
         />
         <DifficultyButton
           id={1}
@@ -31,6 +35,7 @@ const ChooseDifficulty = (props:{
           setDifficulty={props.setDifficulty}
           resetBallList={props.resetBallList}
           setIsJumpPossible={props.setIsJumpPossible}
+          setSavedDiff={(diff:string)=>setSavedDiff(diff)}
         />
         <DifficultyButton
           id={2}
@@ -38,6 +43,7 @@ const ChooseDifficulty = (props:{
           setDifficulty={props.setDifficulty}
           resetBallList={props.resetBallList}
           setIsJumpPossible={props.setIsJumpPossible}
+          setSavedDiff={(diff:string)=>setSavedDiff(diff)}
         />
       </Suspense>
     </group>

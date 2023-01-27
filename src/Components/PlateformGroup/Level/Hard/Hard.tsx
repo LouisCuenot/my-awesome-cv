@@ -1,7 +1,11 @@
 import React from 'react'
 import { Image } from '@react-three/drei'
+import MovingBar from '../Obstacles/MovingBar/MovingBar'
+import Wind from '../Obstacles/Wind/Wind'
 
-const Hard = () => {
+const Hard = (props:{
+  setWind:(value:number)=>void
+}) => {
   return (
     <>
         <Image
@@ -12,6 +16,8 @@ const Hard = () => {
             scale={[15.25,8.25]}
             
         />
+        <MovingBar/>
+        <Wind setWind={props.setWind}/>
     </>
   )
 }

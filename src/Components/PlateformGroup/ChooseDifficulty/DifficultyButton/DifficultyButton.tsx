@@ -8,9 +8,10 @@ const DifficultyButton = (props:{
     setDifficulty:(dif:string)=>void,
     resetBallList:(numb:number[])=>void
     setIsJumpPossible:()=>void
+    setSavedDiff:(diff:string)=>void
 }) => {
 
-    const {id, difficulty, setDifficulty, resetBallList} = props
+    const {id, difficulty, setDifficulty, resetBallList, setSavedDiff} = props
     const [isHovered, setIsHovered] = useState<boolean>(false)
 
     const {scale, position} = useSpring({
@@ -23,6 +24,7 @@ const DifficultyButton = (props:{
         position={[(id-1)*4,-1.5,0]}
         onPointerDown={()=>{
             setDifficulty(difficulty)
+            setSavedDiff(difficulty)
             resetBallList([0])
         }}
     >

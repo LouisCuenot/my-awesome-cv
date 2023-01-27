@@ -1,5 +1,5 @@
 import { Vector3, useFrame, extend } from '@react-three/fiber'
-import { Image,Plane,RoundedBox } from '@react-three/drei'
+import { Image,Plane,RoundedBox, Text } from '@react-three/drei'
 import React, { useEffect, useState, useRef } from 'react'
 import { CuboidCollider, RigidBody } from '@react-three/rapier'
 import * as THREE from 'three'
@@ -49,9 +49,7 @@ const CVZone = (props:{
         scale: isActive ? 1 : 0
     })
 
-    useEffect(()=>{
-        console.log(percentageCapped)
-    },[percentageCapped])
+
 
   return (
     <group
@@ -83,6 +81,9 @@ const CVZone = (props:{
         {
             id === currentCappingZoneID ?
             <>
+                <Text color="#493423" anchorX="center" anchorY="middle" fontSize={0.3} font={'./Fonts/Montserrat-Light.ttf'}  >
+                    Stand here
+                </Text>
                 <Plane
                     args={[size.width-0.1,0.1,32,2]}
                     position-y={-size.height*0.5}

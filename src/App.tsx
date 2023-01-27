@@ -3,14 +3,19 @@ import React, { useEffect, useState, useRef, KeyboardEvent } from 'react';
 import './App.css';
 
 import { Canvas } from '@react-three/fiber';
+import * as THREE from 'three'
 
 import TScreenInputs from './Components/TScreenInputs/TScreenInputs';
 import PlateformGroup from './Components/PlateformGroup/PlateformGroup';
 import { Physics, Debug } from '@react-three/rapier';
 import Directionnal from './Components/Directionnal';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, Sky } from '@react-three/drei';
 import VoidArea from './Components/VoidArea/VoidArea';
 import BallMapping from './Components/BallMapping/BallMapping';
+import WinLoseScreen from './Components/WinLoseScreen/WinLoseScreen';
+import LivesUI from './Components/LivesUI/LivesUI';
+
+
 
 
 
@@ -19,13 +24,18 @@ function App() {
 
   const appDiv = useRef<HTMLDivElement>(null!)
 
+
   const [difficulty, setDifficulty] = useState<string>('commands')
+
+  const [savedDiff, setSavedDiff] = useState<string>('')
 
   const [isTouchScreen, setIsTouchScreen] = useState<boolean>(false)
 
   const [isJumpPossible, setIsJumpPossible] = useState<boolean>(false)
 
   const [jumpValue, setJumpValue] = useState<number>(0)
+
+  const [windValue, setWindValue] = useState<number>(0)
 
   const [pressedKeys, setPressedKeys] = useState<{
     top:boolean,
@@ -40,6 +50,10 @@ function App() {
       right:false
     }
   )
+
+
+
+
 
   const [currentInputs, setCurrentInputs] = useState<{
     top:boolean,
@@ -186,32 +200,52 @@ function App() {
     }    
   },[pressedKeys])
 
-  
+
+
+
   
 
   return (
     <div className="App" tabIndex={-1} ref={appDiv} onKeyDown={handleKeyDown} onKeyUp={(e)=>handleKeyUp(e)} >
+ 
       <Canvas 
         id='r3fCanva'
+        shadows  
         camera={{
-          position:[0,8,10]
+          position:[0,10,12],
+          fov:60
         }}
-        shadows
-      >
+      >  
+       
+        
+
         <color attach='background' args={[0x493423]}/>
         <Directionnal/>
-        <ambientLight args={[0xffffff,0.2]}/>
+        <ambientLight args={[0xffffff,0.6]}/>
+        <WinLoseScreen 
+          difficulty={difficulty} 
+          ballList={ballsList}
+          setDifficulty={(difficulty:string)=>setDifficulty(difficulty)}
+          savedDiff={savedDiff}
+          resetBallList={(ballList:number[])=>setBallsList(ballList)}
+        />
+        <LivesUI
+          ballMapping={ballsList}
+          difficulty={difficulty}
+        />
         <Physics>
-         
-         
+          
           <PlateformGroup 
             currentInputs={currentInputs} 
             difficulty={difficulty}
             isTouchScreen={isTouchScreen}
             setDifficulty={(dif:string)=>setDifficulty(dif)}
             setBallList={(numb:number[])=>setBallsList(numb)}
+            ballList={ballsList}
             isJumpPossible={isJumpPossible}
             setIsJumpPossible={(jump:boolean)=>setIsJumpPossible(jump)}
+            setSavedDiff={(diff:string)=>setSavedDiff(diff)}
+            setWind={(value:number)=>setWindValue(value)}
           />
           <VoidArea
             onBallFall={()=>setBallsList(ballsList.concat(ballsList.length))}
@@ -221,9 +255,10 @@ function App() {
             isJumpPossible={isJumpPossible}
             jumpValue={jumpValue}
             setIsJumpPossible={()=>setIsJumpPossible(false)}
+            windValue={windValue}
           />
         </Physics>
-        <OrbitControls/>
+        
       </Canvas>
       {
         isTouchScreen &&

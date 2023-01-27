@@ -6,6 +6,7 @@ import './Commands.scss'
 
 
 
+
 const Commands = (props:{
     difficulty:string,
     setDifficulty:(dif:string)=>void,
@@ -19,7 +20,14 @@ const {isTouchScreen, setDifficulty, resetBallList, setIsJumpPossible} = props
 
 const [isHovered, setIsHovered] = useState<boolean>(false)
 
-
+useEffect(()=>{
+    setTimeout(()=>{
+        setIsHovered(true)
+        setTimeout(()=>{
+            setIsHovered(false)
+        },700)
+    },10000)
+},[])
 
 const {scale, position} = useSpring({
     scale:isHovered ? 1 : 0,
@@ -102,11 +110,11 @@ const {scale, position} = useSpring({
                 }}
             >  
                 <Text color="#493423" anchorX="center" anchorY="middle" fontSize={0.5} font={'./Fonts/Montserrat.ttf'} position={[0,0,0.01]} >
-                       Got it !
+                       Click Here
                 </Text>
                 
                 <Plane
-                    args={[2.8,1]}
+                    args={[3.2,1]}
                     onPointerEnter={()=>setIsHovered(true)}
                     onPointerLeave={()=>setIsHovered(false)}
                 >
@@ -119,7 +127,7 @@ const {scale, position} = useSpring({
                     scale-z={scale}
                     position-z={position}
                 >
-                    <boxGeometry args={[2.8,1,0.2]}/>
+                    <boxGeometry args={[3.2,1,0.2]}/>
                     <meshStandardMaterial transparent opacity={0} />
                     <Edges
                         color={0x493423}
