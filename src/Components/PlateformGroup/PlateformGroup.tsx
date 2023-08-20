@@ -79,7 +79,7 @@ const PlateformGroup = (props:{
             colliders={false}
             ref={platformHitbox}
         >
-            <CuboidCollider args={[8,0.1,4.5]} friction={2} onContactForce={()=>{
+            <CuboidCollider args={[8,0.1,4.5]} friction={150} onContactForce={()=>{
                 if(isJumpPossible === false){
                     setIsJumpPossible(true)
                 }

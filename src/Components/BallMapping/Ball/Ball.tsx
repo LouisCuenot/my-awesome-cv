@@ -67,7 +67,7 @@ useEffect(()=>{
           gravityScale={ballGravity}
           ref={ballRef}
         >
-          <BallCollider args={[0.6]} mass={1.2} friction={2}  />
+          <BallCollider args={[0.6]} mass={4} friction={150} />
           <mesh castShadow>
               <sphereGeometry args={[0.6,32,16]}/>
               <meshPhysicalMaterial color={'#bff0ff'} transmission={1} thickness={0.2} roughness={0} />
